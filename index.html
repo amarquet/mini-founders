@@ -85,6 +85,21 @@
   .btn-ghost{background:#fff}
   .hand{font-family:'Caveat',cursive;font-size:1.35rem;color:var(--marker);font-weight:700}
 
+  /* ---------- taped sketches ---------- */
+  .sketchbox{
+    position:relative;max-width:840px;margin:56px auto 0;
+    background:#fff;border:2.5px solid var(--ink);border-radius:14px;
+    box-shadow:4px 4px 0 rgba(23,38,74,.15);padding:16px;transform:rotate(-1deg);
+  }
+  .sketchbox.tilt-r{transform:rotate(1.2deg)}
+  .sketchbox::before,.sketchbox::after{
+    content:"";position:absolute;top:-14px;width:86px;height:26px;
+    background:rgba(255,216,77,.78);border:1px solid rgba(23,38,74,.18);border-radius:2px;z-index:2;
+  }
+  .sketchbox::before{left:36px;transform:rotate(-8deg)}
+  .sketchbox::after{right:36px;transform:rotate(7deg)}
+  .sketchbox img{display:block;width:100%;height:auto;border-radius:8px}
+
   /* price tag */
   .pricetag{
     position:absolute;right:24px;top:64px;
@@ -286,6 +301,10 @@
       <div class="fact">teams of <span>3–4</span></div>
       <div class="fact">trainers native in <span>EN·PT·FR·RU</span></div>
     </div>
+
+    <div class="sketchbox">
+      <img src="sketch1.jpg" alt="Hand-drawn sketch: Mini Founders summer camp. Two kids wonder about a problem, sketch an idea together, and launch it like a rocket.">
+    </div>
   </div>
 
   <!-- WEEK STORY -->
@@ -433,6 +452,10 @@
           <h3>Pitching in English</h3>
           <p>Present the product, the numbers and the lessons learned to a room full of adults. Confidence you can't get from a worksheet.</p>
         </div>
+      </div>
+
+      <div class="sketchbox tilt-r">
+        <img src="sketch2.jpg" alt="Hand-drawn sketch: think, create, build, pitch, have fun. From idea to MVP, real projects, real impact.">
       </div>
     </div>
   </section>
