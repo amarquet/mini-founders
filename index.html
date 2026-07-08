@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Founders · Summer Bootcamp for Entrepreneurial Kids · Lisbon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Space+Mono:wght@400;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF5;
+    --grid:#DCE7F3;
+    --ink:#17264A;
+    --marker:#2457D6;
+    --hi:#FFD84D;
+    --sold:#2F9E63;
+    --tag:#E63946;
+    --soft:#5A6B8C;
+    --card:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    font-family:'Nunito',sans-serif;
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:28px 28px;
+    line-height:1.6;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,250,245,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:3px solid var(--ink);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.35rem;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+  .logo .dot{width:14px;height:14px;border-radius:4px;background:var(--hi);border:2.5px solid var(--ink);display:inline-block;transform:rotate(8deg)}
+  .nav a.cta{
+    font-family:'Fredoka',sans-serif;font-weight:600;
+    background:var(--hi);color:var(--ink);text-decoration:none;
+    padding:9px 20px;border:2.5px solid var(--ink);border-radius:999px;
+    box-shadow:3px 3px 0 var(--ink);transition:transform .12s, box-shadow .12s;
+  }
+  .nav a.cta:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+  .nav a.cta:focus-visible, a:focus-visible, button:focus-visible, summary:focus-visible{outline:3px solid var(--marker);outline-offset:3px}
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 56px;position:relative}
+  .kicker{
+    font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
+    display:inline-block;background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:4px;transform:rotate(-1.2deg);
+  }
+  h1{
+    font-family:'Fredoka',sans-serif;font-weight:700;
+    font-size:clamp(2.5rem,6.4vw,4.4rem);
+    line-height:1.06;letter-spacing:-.02em;margin:26px 0 8px;max-width:16ch;
+  }
+  h1 .hl{position:relative;white-space:nowrap}
+  h1 .hl::after{
+    content:"";position:absolute;left:-4px;right:-4px;bottom:6%;height:42%;
+    background:var(--hi);z-index:-1;transform:rotate(-1deg);border-radius:3px;
+  }
+  .hero p.lead{font-size:1.2rem;max-width:56ch;color:var(--soft);font-weight:600;margin:18px 0 30px}
+  .hero p.lead b{color:var(--ink)}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .btn{
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.05rem;cursor:pointer;text-decoration:none;
+    padding:14px 30px;border:3px solid var(--ink);border-radius:999px;display:inline-block;
+    box-shadow:4px 4px 0 var(--ink);transition:transform .12s, box-shadow .12s;color:var(--ink);
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn-primary{background:var(--marker);color:#fff}
+  .btn-ghost{background:#fff}
+  .hand{font-family:'Caveat',cursive;font-size:1.35rem;color:var(--marker);font-weight:700}
+
+  /* price tag */
+  .pricetag{
+    position:absolute;right:24px;top:64px;
+    background:var(--tag);color:#fff;font-family:'Space Mono',monospace;
+    padding:18px 22px;border:3px solid var(--ink);border-radius:10px;
+    transform:rotate(6deg);box-shadow:5px 5px 0 var(--ink);text-align:center;max-width:190px;
+  }
+  .pricetag::before{
+    content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    width:16px;height:16px;background:var(--paper);border:3px solid var(--ink);border-radius:50%;
+  }
+  .pricetag .big{font-size:1.6rem;font-weight:700;display:block;line-height:1.1;margin:4px 0}
+  .pricetag .small{font-size:.68rem;letter-spacing:.08em;display:block}
+  @media(max-width:860px){.pricetag{position:static;display:inline-block;margin-top:28px;transform:rotate(-2deg)}}
+
+  .facts{display:flex;gap:14px;flex-wrap:wrap;margin-top:40px}
+  .fact{
+    background:#fff;border:2.5px solid var(--ink);border-radius:10px;padding:10px 18px;
+    font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;
+  }
+  .fact span{color:var(--marker)}
+
+  /* ---------- section scaffolding ---------- */
+  section{padding:72px 0}
+  .eyebrow{font-family:'Caveat',cursive;font-size:1.6rem;color:var(--marker);font-weight:700;display:block;transform:rotate(-1deg)}
+  h2{font-family:'Fredoka',sans-serif;font-weight:700;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.01em;margin:4px 0 14px}
+  .sub{color:var(--soft);font-weight:600;max-width:62ch;margin-bottom:40px}
+
+  /* ---------- week cards ---------- */
+  .week{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  @media(max-width:960px){.week{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.week{grid-template-columns:1fr}}
+  .day{
+    background:var(--card);border:2.5px solid var(--ink);border-radius:12px;
+    padding:22px 18px 20px;position:relative;
+    box-shadow:4px 4px 0 rgba(23,38,74,.15);
+  }
+  .day:nth-child(odd){transform:rotate(-.7deg)}
+  .day:nth-child(even){transform:rotate(.7deg)}
+  .day::before{
+    content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);
+    width:74px;height:22px;background:rgba(255,216,77,.75);border:1px solid rgba(23,38,74,.18);border-radius:2px;
+  }
+  .day .dow{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+  .day h3{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.15rem;margin:6px 0 8px}
+  .day p{font-size:.9rem;color:var(--soft);font-weight:600}
+  .day.friday{background:var(--hi)}
+  .day.friday p{color:var(--ink)}
+  .day .stamp{
+    position:absolute;bottom:12px;right:12px;font-family:'Caveat',cursive;font-size:1.15rem;
+    color:var(--sold);border:2px solid var(--sold);border-radius:6px;padding:0 8px;transform:rotate(-8deg);font-weight:700;
+  }
+
+  /* ---------- weekly agenda grid ---------- */
+  .agenda-scroll{overflow-x:auto;padding:16px 4px 8px;-webkit-overflow-scrolling:touch}
+  table.agenda{
+    border-collapse:separate;border-spacing:0;width:100%;min-width:920px;
+    background:#fff;border:3px solid var(--ink);border-radius:14px;overflow:hidden;
+    box-shadow:6px 6px 0 rgba(23,38,74,.15);
+  }
+  .agenda th, .agenda td{border-bottom:1.5px solid var(--grid);border-right:1.5px solid var(--grid);vertical-align:top}
+  .agenda tr:last-child td{border-bottom:none}
+  .agenda th:last-child, .agenda td:last-child{border-right:none}
+  .agenda thead th{
+    background:var(--ink);color:#fff;font-family:'Fredoka',sans-serif;font-weight:600;
+    font-size:.95rem;padding:12px 14px;text-align:left;
+  }
+  .agenda thead th small{display:block;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:#9FB0D4;font-weight:400}
+  .agenda .time{
+    font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;color:var(--soft);
+    background:var(--paper);padding:12px 12px;white-space:nowrap;width:96px;
+  }
+  .agenda td{padding:12px 14px;font-size:.85rem;font-weight:600}
+  .agenda td .s{font-family:'Fredoka',sans-serif;font-weight:600;color:var(--ink);display:block;font-size:.92rem}
+  .agenda td .d{color:var(--soft);font-size:.78rem;display:block;margin-top:2px}
+  .agenda tr.band td{background:var(--paper);font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-align:center;padding:8px}
+  .agenda td.friday-cell{background:#FFF7DC}
+  .agenda .pill{
+    display:inline-block;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.06em;
+    border:1.5px solid var(--ink);border-radius:999px;padding:1px 8px;margin-top:6px;background:var(--hi);
+  }
+  .agenda .pill.studio{background:#E8D9FF}
+  .agenda .pill.online{background:#D7F5E4}
+  .agenda .pill.camera{background:#FFE0D6}
+  .swipe-hint{display:none;font-family:'Caveat',cursive;font-size:1.2rem;color:var(--marker);font-weight:700;text-align:center;margin-top:6px}
+  @media(max-width:960px){.swipe-hint{display:block}}
+
+  /* ---------- learn grid ---------- */
+  .learn{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:860px){.learn{grid-template-columns:1fr}}
+  .learn .card{
+    background:#fff;border:2.5px solid var(--ink);border-radius:14px;padding:26px;
+    box-shadow:4px 4px 0 rgba(23,38,74,.15);
+  }
+  .learn .emoji{font-size:2rem;display:inline-block;background:var(--paper);border:2.5px solid var(--ink);border-radius:12px;padding:8px 12px;transform:rotate(-4deg)}
+  .learn h3{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.25rem;margin:16px 0 8px}
+  .learn p{color:var(--soft);font-weight:600;font-size:.95rem}
+
+  /* ---------- trainers ---------- */
+  .trainers{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  @media(max-width:960px){.trainers{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.trainers{grid-template-columns:1fr}}
+  .trainer{
+    background:#fff;border:2.5px solid var(--ink);border-radius:14px;padding:26px 22px 22px;
+    box-shadow:4px 4px 0 rgba(23,38,74,.15);text-decoration:none;color:var(--ink);
+    position:relative;display:block;transition:transform .12s, box-shadow .12s;
+  }
+  .trainer:nth-child(odd){transform:rotate(-.6deg)}
+  .trainer:nth-child(even){transform:rotate(.6deg)}
+  .trainer:hover{transform:translate(-2px,-2px) rotate(0);box-shadow:7px 7px 0 rgba(23,38,74,.2)}
+  .trainer::before{
+    content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);
+    width:70px;height:22px;background:rgba(255,216,77,.75);border:1px solid rgba(23,38,74,.18);border-radius:2px;
+  }
+  .trainer .mono{
+    font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.3rem;
+    display:inline-flex;align-items:center;justify-content:center;
+    width:58px;height:58px;border:2.5px solid var(--ink);border-radius:50%;
+    background:var(--paper);transform:rotate(-4deg);
+  }
+  .trainer h3{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.15rem;margin:14px 0 4px}
+  .trainer p{color:var(--soft);font-weight:700;font-size:.88rem}
+  .trainer .li{
+    display:inline-block;margin-top:14px;font-family:'Space Mono',monospace;font-size:.72rem;
+    font-weight:700;color:var(--marker);border-bottom:2px solid var(--hi);
+  }
+
+  /* ---------- info ---------- */
+  .info{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media(max-width:860px){.info{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.info{grid-template-columns:1fr}}
+  .info .box{background:#fff;border:2.5px solid var(--ink);border-radius:12px;padding:20px}
+  .info .box .k{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+  .info .box .v{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.1rem;margin-top:6px}
+
+  /* ---------- faq ---------- */
+  details{
+    background:#fff;border:2.5px solid var(--ink);border-radius:12px;margin-bottom:14px;overflow:hidden;
+  }
+  summary{
+    cursor:pointer;font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.05rem;
+    padding:18px 22px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:1.5rem;color:var(--marker);font-weight:700}
+  details[open] summary::after{content:"–"}
+  details .a{padding:0 22px 20px;color:var(--soft);font-weight:600}
+
+  /* ---------- final cta ---------- */
+  .final{
+    background:var(--ink);color:var(--paper);border-radius:20px;padding:64px 40px;text-align:center;position:relative;overflow:hidden;
+  }
+  .final h2{color:#fff}
+  .final .hand{color:var(--hi);font-size:1.6rem}
+  .final p{max-width:56ch;margin:12px auto 32px;color:#B9C4DC;font-weight:600}
+  .final .spots{font-family:'Space Mono',monospace;font-size:.8rem;margin-top:24px;color:#8FA0C4}
+  .form-shell{
+    max-width:640px;margin:0 auto;background:#fff;border:3px solid var(--hi);border-radius:14px;padding:10px;
+  }
+
+  footer{padding:36px 0 48px;text-align:center;font-family:'Space Mono',monospace;font-size:.78rem;color:var(--soft)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="dot"></span>Mini Founders</a>
+    <a class="cta" href="#booklet">Get the booklet</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="wrap hero">
+    <span class="kicker">Summer bootcamp · Ages 8–12 · Lisbon · Taught in English</span>
+    <h1>One week to build, <span class="hl">sell</span> and learn with AI</h1>
+    <p class="lead">Sports in the morning, business in the afternoon. Kids arrive at 14:00 already lunched, and by Friday every team has turned an idea into a <b>real product, validated by real customers and sold for real money</b>, online and at our market day. Powered by generative AI and a lot of hands-on making.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://9pkbvhamci.zite.so" target="_blank" rel="noopener">Download the program booklet</a>
+      <a class="btn btn-ghost" href="#agenda">See the weekly agenda</a>
+      <span class="hand">only 16 spots!</span>
+    </div>
+
+    <div class="pricetag" aria-label="Pricing available on request, in the program booklet">
+      <span class="small">PRICING</span>
+      <span class="big">ON<br>REQUEST</span>
+      <span class="small">get the booklet ↓</span>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><span>Jul 27–31</span> 2026</div>
+      <div class="fact"><span>14:00–17:30</span> · mornings free for sports</div>
+      <div class="fact">teams of <span>3–4</span></div>
+      <div class="fact">trainers native in <span>EN·PT·FR·RU</span></div>
+    </div>
+  </div>
+
+  <!-- WEEK STORY -->
+  <section id="week">
+    <div class="wrap">
+      <span class="eyebrow">the plan for the week</span>
+      <h2>From notebook idea to online shop in 5 days</h2>
+      <p class="sub">No lectures. Every concept shows up exactly when the project needs it: interviews, pricing, product photos, marketing assets and a podcast episode all happen because the team's business demands them.</p>
+      <div class="week">
+        <div class="day">
+          <span class="dow">Mon · 27</span>
+          <h3>Ideas</h3>
+          <p>What problem do you actually have? Teams form, pick an idea, and use AI to attack and improve it. First landing page draft goes live before snack time.</p>
+        </div>
+        <div class="day">
+          <span class="dow">Tue · 28</span>
+          <h3>Validation</h3>
+          <p>Each team builds an online form and interviews real people. Ideas nobody wants die today. Pre-orders open by end of day.</p>
+        </div>
+        <div class="day">
+          <span class="dow">Wed · 29</span>
+          <h3>Build + shoot</h3>
+          <p>Make the product. Then a pro-camera photo session and Canva design sprint: logo, posters, social posts. The online shop gets real.</p>
+        </div>
+        <div class="day">
+          <span class="dow">Thu · 30</span>
+          <h3>Marketing studio</h3>
+          <p>Record a podcast episode with video in our studio to promote the product. Edit, publish, share. Prep the pitch for market day.</p>
+        </div>
+        <div class="day friday">
+          <span class="dow">Fri · 31</span>
+          <h3>Market day</h3>
+          <p>Families invited. Real sales, real money, online orders delivered. Each team presents its numbers: what they made, sold and learned.</p>
+          <span class="stamp">SOLD OUT!</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEKLY AGENDA GRID -->
+  <section id="agenda" style="padding-top:16px">
+    <div class="wrap">
+      <span class="eyebrow">hour by hour</span>
+      <h2>The weekly agenda</h2>
+      <p class="sub">Mornings stay free for sports, beach or family time. Kids arrive at 14:00 already lunched, and we wrap at 17:30. Here is how the afternoons unfold.</p>
+
+      <div class="agenda-scroll">
+        <table class="agenda">
+          <thead>
+            <tr>
+              <th class="time" scope="col">Time</th>
+              <th scope="col">Monday<small>JUL 27 · IDEAS</small></th>
+              <th scope="col">Tuesday<small>JUL 28 · VALIDATION</small></th>
+              <th scope="col">Wednesday<small>JUL 29 · BUILD + SHOOT</small></th>
+              <th scope="col">Thursday<small>JUL 30 · MARKETING STUDIO</small></th>
+              <th scope="col">Friday<small>JUL 31 · MARKET DAY</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="band">
+              <td class="time">14:00</td>
+              <td colspan="5">Arrival + check-in · kids come already lunched, ready to build</td>
+            </tr>
+            <tr>
+              <td class="time">14:10</td>
+              <td><span class="s">Welcome + team formation</span><span class="d">Mixed-age teams of 3–4, roles assigned: CEO, maker, designer, seller.</span></td>
+              <td><span class="s">What do users want?</span><span class="d">How to ask questions, listen, and accept "no". Interview training.</span></td>
+              <td><span class="s">Product workshop</span><span class="d">Build the real thing: physical product or digital service, hands on.</span></td>
+              <td><span class="s">Storytelling + pitch</span><span class="d">Why people buy stories, not things. Craft the team's pitch in English.</span></td>
+              <td><span class="s">Market day setup</span><span class="d">Stand, signage, price tags, float and change. Online orders packed.</span></td>
+            </tr>
+            <tr>
+              <td class="time">15:10</td>
+              <td><span class="s">Idea sprint with AI</span><span class="d">Brainstorm with Claude, facilitator at the keyboard. Attack and improve each idea.</span><span class="pill">AI SESSION</span></td>
+              <td><span class="s">Build your survey + interviews</span><span class="d">Teams create an online form, then interview 5 real people each.</span><span class="pill online">FORM BUILDING</span></td>
+              <td><span class="s">Pro photo session</span><span class="d">Product photography with professional cameras. Framing, light, hero shots.</span><span class="pill camera">PRO CAMERAS</span></td>
+              <td><span class="s">Podcast + video recording</span><span class="d">Each team records a short episode in our studio to promote its product.</span><span class="pill studio">STUDIO</span></td>
+              <td class="friday-cell"><span class="s">THE MARKET OPENS</span><span class="d">Families and friends buy for real. Teams sell, take payments and track every sale.</span><span class="pill">REAL SALES</span></td>
+            </tr>
+            <tr class="band">
+              <td class="time">16:10</td>
+              <td colspan="5">Snack break · fuel for founders</td>
+            </tr>
+            <tr>
+              <td class="time">16:30</td>
+              <td><span class="s">First landing page</span><span class="d">Draft a simple web page for the idea with AI help. It goes live today.</span><span class="pill online">GOES ONLINE</span></td>
+              <td><span class="s">Kill, pivot or go + pre-orders</span><span class="d">Decide with data. Update the page and open online pre-orders.</span><span class="pill online">SELLING ONLINE</span></td>
+              <td><span class="s">Canva design sprint</span><span class="d">Logo, poster, social posts and price cards. Publish photos to the shop page.</span><span class="pill">CANVA</span></td>
+              <td><span class="s">Edit + publish</span><span class="d">Cut the video, pick the thumbnail, publish and share with family (the first audience).</span><span class="pill studio">STUDIO</span></td>
+              <td class="friday-cell"><span class="s">Demo day: the numbers</span><span class="d">Each team presents units sold, revenue, costs and what they would do differently.</span></td>
+            </tr>
+            <tr>
+              <td class="time">17:15</td>
+              <td><span class="s">Daily check-out</span><span class="d">Each team shares one win and one blocker.</span></td>
+              <td><span class="s">Daily check-out</span><span class="d">Pre-order counter on the wall gets its first marks.</span></td>
+              <td><span class="s">Daily check-out</span><span class="d">Shop pages reviewed together, orders checked.</span></td>
+              <td><span class="s">Daily check-out</span><span class="d">Final pitch rehearsal. Tomorrow we sell.</span></td>
+              <td class="friday-cell"><span class="s">Awards + celebration</span><span class="d">Certificates, prizes and a proper founder send-off with families.</span></td>
+            </tr>
+            <tr class="band">
+              <td class="time">17:30</td>
+              <td colspan="5">Pick-up · founders go home tired and proud</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="swipe-hint">← swipe to see the whole week →</p>
+    </div>
+  </section>
+
+  <!-- LEARN -->
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">what they take home</span>
+      <h2>Skills school doesn't teach yet</h2>
+      <p class="sub">Beyond the product they created (and the money they earned!), every kid trains real muscles they will use for life. All sessions taught in English, with native trainers in English, Portuguese, French and Russian on the floor.</p>
+      <div class="learn">
+        <div class="card">
+          <span class="emoji">🤖</span>
+          <h3>Generative AI as a tool</h3>
+          <p>Brainstorm, write, design and build landing pages with AI, always with an adult at the keyboard. Not magic: a tool, and they learn to be the boss of it.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🎤</span>
+          <h3>Talking to real customers</h3>
+          <p>Build a survey, run interviews, hear "no" and change course based on facts. Product validation, ages 8 to 12 edition.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">📸</span>
+          <h3>Marketing that ships</h3>
+          <p>Shoot products with pro cameras, design assets in Canva, and record a podcast with video in our studio to promote what they built.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🛒</span>
+          <h3>Selling online from day one</h3>
+          <p>A live landing page on Monday, pre-orders on Tuesday, a real shop page by Wednesday. Online selling is the week's spine, not the finale.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">💶</span>
+          <h3>Money with a purpose</h3>
+          <p>Set prices, count costs and margin, give change, track every sale on a hand-made dashboard. Math kids actually want to do.</p>
+        </div>
+        <div class="card">
+          <span class="emoji">🗣️</span>
+          <h3>Pitching in English</h3>
+          <p>Present the product, the numbers and the lessons learned to a room full of adults. Confidence you can't get from a worksheet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINERS -->
+  <section id="trainers" style="padding-top:8px">
+    <div class="wrap">
+      <span class="eyebrow">who's running the show</span>
+      <h2>Meet the trainers</h2>
+      <p class="sub">Real practitioners, not camp animators: people who build, sell and design products for a living, and love teaching kids how it's done.</p>
+      <div class="trainers">
+        <a class="trainer" href="https://www.linkedin.com/in/marquet/" target="_blank" rel="noopener">
+          <span class="mono">AM</span>
+          <h3>André Marquet</h3>
+          <p>Entrepreneurship + Coordination</p>
+          <span class="li">LinkedIn ↗</span>
+        </a>
+        <a class="trainer" href="https://www.linkedin.com/in/arturpoluektov/" target="_blank" rel="noopener">
+          <span class="mono">AP</span>
+          <h3>Artur Poluektov</h3>
+          <p>Sales + Product</p>
+          <span class="li">LinkedIn ↗</span>
+        </a>
+        <a class="trainer" href="https://www.linkedin.com/in/natalia-portes-274819272/" target="_blank" rel="noopener">
+          <span class="mono">NP</span>
+          <h3>Natalia Portes</h3>
+          <p>Design + Marketing</p>
+          <span class="li">LinkedIn ↗</span>
+        </a>
+        <a class="trainer" href="https://www.linkedin.com/in/margaux-botton25/" target="_blank" rel="noopener">
+          <span class="mono">MB</span>
+          <h3>Margaux Botton</h3>
+          <p>Customer Support</p>
+          <span class="li">LinkedIn ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section style="padding-top:8px">
+    <div class="wrap">
+      <span class="eyebrow">practical info</span>
+      <h2>The essentials for parents</h2>
+      <div class="info" style="margin-top:28px">
+        <div class="box"><div class="k">Ages</div><div class="v">8–12 years</div></div>
+        <div class="box"><div class="k">Dates</div><div class="v">Jul 27–31, 2026</div></div>
+        <div class="box"><div class="k">Hours</div><div class="v">14:00–17:30</div></div>
+        <div class="box"><div class="k">Location</div><div class="v">Lisbon</div></div>
+        <div class="box"><div class="k">Language</div><div class="v">Taught in English</div></div>
+        <div class="box"><div class="k">Trainers</div><div class="v">Native EN · PT · FR · RU</div></div>
+        <div class="box"><div class="k">Included</div><div class="v">Snack + all gear</div></div>
+        <div class="box"><div class="k">Pricing</div><div class="v">On request · in the booklet</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="padding-top:8px">
+    <div class="wrap" style="max-width:760px">
+      <span class="eyebrow">frequently asked</span>
+      <h2>Questions parents ask</h2>
+      <div style="margin-top:28px">
+        <details>
+          <summary>Will the kids use AI on their own?</summary>
+          <div class="a">No. Generative AI tools have minimum-age requirements, so they are always used together with an adult facilitator, on a shared screen or with the adult at the keyboard. The kids think, decide and give the instructions; the adult operates the tool.</div>
+        </details>
+        <details>
+          <summary>My child doesn't speak English well. Is that a problem?</summary>
+          <div class="a">The program is taught in English, but our trainers are native speakers of English, Portuguese, French and Russian, so no kid ever gets stuck for language reasons. Most children pick up the working vocabulary within a day, and pitching in English on Friday is one of the proudest moments of the week.</div>
+        </details>
+        <details>
+          <summary>What does "selling online" actually mean for kids?</summary>
+          <div class="a">Each team publishes a simple shop page (built with AI, adult at the keyboard) where family and friends can place pre-orders during the week. Payments are symbolic and collected in person at market day. No child handles online payments or personal data.</div>
+        </details>
+        <details>
+          <summary>Is the money real?</summary>
+          <div class="a">Yes, in small symbolic amounts. Families buy the products at market day and via pre-orders. The point is the learning: pricing, change, margin and the thrill of the first sale. Each team decides what to do with its earnings.</div>
+        </details>
+        <details>
+          <summary>What about photos, video and privacy?</summary>
+          <div class="a">Kids shoot product photos and record a promotional podcast in our studio. Anything published online focuses on the products; children only appear with explicit written consent from parents, collected at registration.</div>
+        </details>
+        <details>
+          <summary>Do they need to bring a laptop or materials?</summary>
+          <div class="a">No. All materials, cameras, studio time and digital tools are provided. Just come lunched and bring energy (afternoon snack is on us).</div>
+        </details>
+        <details>
+          <summary>Is sport included?</summary>
+          <div class="a">The program runs in the afternoon precisely to keep mornings free for sports, beach or family. If there is enough interest we may organize a morning sports option with a partner. Tell us in the form below.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA + FILLOUT FORM -->
+  <section id="booklet">
+    <div class="wrap">
+      <div class="final">
+        <span class="hand">spots go fast!</span>
+        <h2>Get the program booklet + pricing</h2>
+        <p>Leave your details and we'll send you the full syllabus, the daily agenda and all pricing options. No commitment, no spam. Only 16 spots, so every child gets real attention.</p>
+
+        <a class="btn" style="background:var(--hi);color:var(--ink);box-shadow:4px 4px 0 rgba(0,0,0,.4)" href="https://9pkbvhamci.zite.so" target="_blank" rel="noopener">Get the booklet + pricing</a>
+
+        <div class="spots">JUL 27–31 · LISBON · AGES 8–12 · TAUGHT IN ENGLISH · PRICING ON REQUEST</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Mini Founders · a Productized program · Lisbon, Portugal
+</footer>
+
+</body>
+</html>
